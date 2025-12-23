@@ -10,13 +10,12 @@ client = OpenAI(api_key='PutKeyHere')
 
 st.title('Plan Your Dream European Vacation')
 
-ctry =  st.selectbox('Select A Country:', ['Albania','Andorra','Austria','Belarus',
-    'Belgium','Bosnia and Herzegovina','Bulgaria','Croatia','Czechia','Denmark',
-    'Estonia','Finland','France','Germany','Greece','Hungary','Iceland','Ireland',
-    'Italy','Kosovo','Latvia','Liechtenstein','Lithuania','Luxembourg','Malta',
-    'Moldova','Monaco','Montenegro','Netherlands','North Macedonia','Norway',
-    'Poland','Portugal','Romania','Russia','San Marino','Serbia','Slovakia',
-    'Slovenia','Spain','Sweden','Switzerland','Turkey','Ukraine','United Kingdom'])
+ctry =  st.selectbox('Select A Country:', ['Albania','Austria','Belarus','Belgium',
+    'Bosnia and Herzegovina','Bulgaria','Croatia','Czechia','Denmark','Estonia',
+    'Finland','France','Germany','Greece','Hungary','Ireland','Italy','Latvia',
+    'Lithuania','Moldova','Netherlands','North Macedonia','Norway','Poland','Portugal',
+    'Romania','Russia','Serbia','Slovakia','Slovenia','Spain','Sweden','Switzerland',
+    'Turkey','Ukraine','United Kingdom'])
 
 if ctry == 'Albania':
     citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
@@ -207,4 +206,5 @@ if Confirm == True and tagtotal == 0:
 # sources:
 # https://simple.wikipedia.org/wiki/List_of_European_countries
 # https://worldpopulationreview.com/cities/albania
+
 
