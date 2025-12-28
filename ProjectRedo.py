@@ -5,12 +5,13 @@ import numpy as np
 from streamlit_option_menu import option_menu
 import os
 from openai import OpenAI
+import datetime
 
 client = OpenAI(api_key='PutKeyHere')
 
 st.title('Plan Your Dream European Vacation')
 
-ctry =  st.selectbox('Select A Country:', ['Albania','Austria','Belarus','Belgium',
+ctry =  st.selectbox('Select a country:', ['Albania','Austria','Belarus','Belgium',
     'Bosnia and Herzegovina','Bulgaria','Croatia','Czechia','Denmark','Estonia',
     'Finland','France','Germany','Greece','Hungary','Ireland','Italy','Latvia',
     'Lithuania','Moldova','Netherlands','North Macedonia','Norway','Poland','Portugal',
@@ -18,112 +19,98 @@ ctry =  st.selectbox('Select A Country:', ['Albania','Austria','Belarus','Belgiu
     'Turkey','Ukraine','United Kingdom'])
 
 if ctry == 'Albania':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Andorra':
-    citty =  st.selectbox('Select A City:', ['Andorra la Vella','les Escaldes','Encamp'])
+    citty =  st.selectbox('Select a city:', ['Tirana','Durrës','Elbasan','Vlorë','Shkodër'])
 if ctry == 'Austria':
-    citty =  st.selectbox('Select A City:', ['Vienna','Graz','Favoriten','Linz','Donaustadt'])
+    citty =  st.selectbox('Select a city:', ['Vienna','Graz','Favoriten','Linz','Donaustadt'])
 if ctry == 'Belarus':
-    citty =  st.selectbox('Select A City:', ['Minsk','Gomel','Vitebsk','Brest','Mahilyow'])
+    citty =  st.selectbox('Select a city:', ['Minsk','Homyel','Vitsyebsk','Brest','Mahilyow'])
 if ctry == 'Belgium':
-    citty =  st.selectbox('Select A City:', ['Brussels','Antwerp','Liege','Gent','Charleroi'])
+    citty =  st.selectbox('Select a city:', ['Brussels','Antwerp','Liège','Ghent','Charleroi'])
 if ctry == 'Bosnia and Herzegovina':
-    citty =  st.selectbox('Select A City:', ['Sarajevo','Banja Luka','Zenica','Tuzla','Mostar'])
+    citty =  st.selectbox('Select a city:', ['Sarajevo','Banja Luka','Zenica','Tuzla','Mostar'])
 if ctry == 'Bulgaria':
-    citty =  st.selectbox('Select A City:', ['Sofia','Plovdiv','Varna','Burgas','Ruse'])
+    citty =  st.selectbox('Select a city:', ['Sofia','Plovdiv','Varna','Burgas','Ruse'])
 if ctry == 'Croatia':
-    citty =  st.selectbox('Select A City:', ['Zagreb','Split','Rijeka','Osijek','Zadar'])
+    citty =  st.selectbox('Select a city:', ['Zagreb','Split','Rijeka','Osijek','Zadar'])
 if ctry == 'Czechia':
-    citty =  st.selectbox('Select A City:', ['Prague','Brno','Ostrava','Pilsen','Liberec'])
+    citty =  st.selectbox('Select a city:', ['Prague','Brno','Ostrava','Pilsen','Liberec'])
 if ctry == 'Denmark':
-    citty =  st.selectbox('Select A City:', ['Copenhagen','Arhus','Odense','Aalborg','Frederiksberg'])
+    citty =  st.selectbox('Select a city:', ['Copenhagen','Arhus','Odense','Aalborg','Frederiksberg'])
 if ctry == 'Estonia':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Tallinn','Tartu','Narva','Kohtla-Jaerve','Pärnu'])
 if ctry == 'Finland':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Helsinki','Tampere','Espoo','Vantaa','Turku'])
 if ctry == 'France':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Paris','Lyon','Marseille','Lille','Toulouse'])
 if ctry == 'Germany':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Berlin','Hamburg','Munich','Cologne','Frankfurt'])
 if ctry == 'Greece':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Athens','Thessaloniki','Patras','Piraeus','Larissa'])
 if ctry == 'Hungary':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Iceland':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Budapest','Debrecen','Miskolc','Szeged','Pécs'])
 if ctry == 'Ireland':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Dublin','Cork','Dun Laoghaire','Luimneach','Gaillimh'])
 if ctry == 'Italy':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Kosovo':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Rome','Venice','Milan','Florence','Rimini'])
 if ctry == 'Latvia':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Liechtenstein':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Rīga','Daugavpils','Liepāja','Jelgava','Jūrmala'])
 if ctry == 'Lithuania':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Luxembourg':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Malta':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Vilnius','Kaunas','Klaipėda','Šiauliai','	Panevėžys'])
 if ctry == 'Moldova':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Monaco':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'Montenegro':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Chișinău','Tiraspol','Bălți','Bender','Rîbnița'])
 if ctry == 'Netherlands':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Amsterdam','Rotterdam','The Hague','Utrecht','Eindhoven'])
 if ctry == 'North Macedonia':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Skopje','Bitola','Kumanovo','Prilep','Tetovo'])
 if ctry == 'Norway':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Oslo','Bergen','Trondheim','Stavanger','Drammen'])
 if ctry == 'Poland':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Warsaw','Kraków','Łódź','Wrocław','Poznań'])
 if ctry == 'Portugal':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Lisbon','Porto','Amadora','Braga','Setúbal'])
 if ctry == 'Romania':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Bucharest','Iași','Cluj-Napoca','Timișoara','Constanța'])
 if ctry == 'Russia':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
-if ctry == 'San Marino':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Moscow','Saint Petersburg','Novosibirsk','Yekaterinburg','Kazan'])
 if ctry == 'Serbia':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Belgrade','Niš','Novi Sad','Zemun','Kragujevac'])
 if ctry == 'Slovakia':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Bratislava','Košice','Prešov','Nitra','Žilina'])
 if ctry == 'Slovenia':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Piran','Kranjska Gora','Ljubljana','Bohinj','Bled'])
 if ctry == 'Spain':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Madrid','Barcelona','Valencia','Zaragoza','Seville'])
 if ctry == 'Sweden':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Stockholm','Gothenburg','Malmö','Uppsala','Sollentuna'])
 if ctry == 'Switzerland':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Zürich','Geneva','Basel','Lausanne','Bern'])
 if ctry == 'Turkey':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Istanbul','Ankara','İzmir','Bursa','Adana'])
 if ctry == 'Ukraine':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['Kyiv','Kharkiv','Odesa','Dnipro','Donetsk'])
 if ctry == 'United Kingdom':
-    citty =  st.selectbox('Select A City:', ['Tirana','Durres','Elbasan','Vlore','Shkoder'])
+    citty =  st.selectbox('Select a city:', ['London','Manchester','Birmingham','Glasgow','Southampton'])
 
 st.write('\n')
-st.subheader('What Kind Of Activities Are You Looking For?')
-st.write('Select Up To Three Types Of Activities')
-boattr = st.checkbox('Boat Tours')
-fdr = st.checkbox('Food and Drink')
+st.subheader('What kind of activities are you looking for?')
+st.write('Select up to three types of activities')
+boattr = st.checkbox('Boat tours')
+fdr = st.checkbox('Food and drink')
 lndm = st.checkbox('Landmarks')
 nat = st.checkbox('Nature')
-vehtr = st.checkbox('Vehicle Tours')
-wlktr = st.checkbox('Walking Tours')
+vehtr = st.checkbox('Vehicle tours')
+wlktr = st.checkbox('Walking tours')
 tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
 tags = []
+vchoice = 0
 
 st.write("\n")
-st.subheader('Click The button Below To Find Activities')
-Confirm = st.button('Make My List')
-if Confirm == True and tagtotal < 4 and tagtotal > 0:
+Ready = st.radio('Are you ready to find activities? ',['Not yet','Yes'])
+if Ready == 'Yes' and tagtotal > 3:
+    st.write('You Selected Too Many Tags')
+if Ready == 'Yes' and tagtotal == 0:
+    st.write('You Need To Select At Least One Tag')
+if Ready == 'Yes' and tagtotal < 4 and tagtotal > 0:
     if boattr == True:
         tags.append('boat tours')
     if fdr == True:
@@ -183,11 +170,13 @@ if Confirm == True and tagtotal < 4 and tagtotal > 0:
                     {
                         "role": "user",
                         "content": f"""
-                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Include a one to two sentence description..
+                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Include a one to two sentence description, it's duration, and a link to the activity.
                         Format the list like this:
                 
                         Attraction Name
+                        The attraction's duration in hours
                         One to two sentence description
+                        A link to the activity
                         """
                     }
                 ],
@@ -198,13 +187,35 @@ if Confirm == True and tagtotal < 4 and tagtotal > 0:
         return vacaylist
     vacay = vacayitems(ctry, citty)
     st.write(vacay)
-    
-if Confirm == True and tagtotal > 3:
-    st.write('You Selected Too Many Tags')
-if Confirm == True and tagtotal == 0:
-    st.write('You Need To Select At Least One Tag')
-# sources:
-# https://simple.wikipedia.org/wiki/List_of_European_countries
-# https://worldpopulationreview.com/cities/albania
-
-
+    st.subheader('Which activity are you choosing?')
+    vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'])
+    if vchoice == '1':
+        v = vacay
+        start = v.find("1. ") + 3
+        end = v.find("\n")
+        vv = v[start:end]
+        st.write(vv)
+    if vchoice == '2':
+        v = vacay
+        start = v.find("2. ") + 3
+        end = v.find("\n")
+        vv = v[start:end]
+        st.write(vv)
+    if vchoice == '3':
+        v = vacay
+        start = v.find("3. ") + 3
+        end = v.find("\n")
+        vv = v[start:end]
+        st.write(vv)
+    if vchoice == '4':
+        v = vacay
+        start = v.find("4. ") + 3
+        end = v.find("\n")
+        vv = v[start:end]
+        st.write(vv)
+    if vchoice == '5':
+        v = vacay
+        start = v.find("5. ") + 3
+        end = v.find("\n")
+        vv = v[start:end]
+        st.write(vv)
