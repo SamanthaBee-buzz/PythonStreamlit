@@ -7,9 +7,97 @@ import os
 from openai import OpenAI
 import datetime
 
-client = OpenAI(api_key='PutKeyHere')
+client = OpenAI(api_key=KeyHere)
+st.markdown("<h1 style='text-align: center; color: white;'>Plan Your European Vacation</h1>", unsafe_allow_html=True)
 
-st.title('Plan Your Dream European Vacation')
+
+def vacayitems(ctry, citty, fday):
+        if len(tags) == 1:
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f"""
+                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fday} involving {tags[0]}. Include a one to two sentence description.
+                        Format the list like this:
+                
+                        Attraction Name
+                        One to two sentence description
+                        """
+                    }
+                ],
+                temperature=0.8,
+                max_tokens=1000
+            )
+        if len(tags) == 2:
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f"""
+                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fday} involving {tags[0]} and/or {tags[1]}. Include a one to two sentence description.
+                        Format the list like this:
+                
+                        Attraction Name
+                        One to two sentence description
+                        """
+                    }
+                ],
+                temperature=0.8,
+                max_tokens=1000
+            )
+        if len(tags) == 3:
+            tagone == tags[0]
+            tagtwo == tags[1]
+            tagthree == tags[2]
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f"""
+                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fday} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Include a one to two sentence description.
+                        Format the list like this:
+                
+                        Attraction Name
+                        One to two sentence description
+                        """
+                    }
+                ],
+                temperature=0.8,
+                max_tokens=1000
+            )
+        vacaylist = response.choices[0].message.content
+        return vacaylist
+def actchoice(vchoice):
+    if vchoice == '1':
+        start = vacay.find("1. ") + 3
+        end = vacay.find("\n")
+        vv = vacay[start:end]
+        st.write(vv)
+    if vchoice == '2':
+        start = vacay.find("2. ") + 3
+        end = vacay.find("\n")
+        vv = vacay[start:end]
+        st.write(vv)
+    if vchoice == '3':
+        start = vacay.find("3. ") + 3
+        end = vacay.find("\n")
+        vv = vacay[start:end]
+        st.write(vv)
+    if vchoice == '4':
+        start = vacay.find("4. ") + 3
+        end = vacay.find("\n")
+        vv = vacay[start:end]
+        st.write(vv)
+    if vchoice == '5':
+        start = vacay.find("5. ") + 3
+        end = vacay.find("\n")
+        vv = vacay[start:end]
+        st.write(vv)
+
 
 ctry =  st.selectbox('Select a country:', ['Albania','Austria','Belarus','Belgium',
     'Bosnia and Herzegovina','Bulgaria','Croatia','Czechia','Denmark','Estonia',
@@ -91,131 +179,55 @@ if ctry == 'Ukraine':
 if ctry == 'United Kingdom':
     citty =  st.selectbox('Select a city:', ['London','Manchester','Birmingham','Glasgow','Southampton'])
 
-st.write('\n')
-st.subheader('What kind of activities are you looking for?')
-st.write('Select up to three types of activities')
-boattr = st.checkbox('Boat tours')
-fdr = st.checkbox('Food and drink')
-lndm = st.checkbox('Landmarks')
-nat = st.checkbox('Nature')
-vehtr = st.checkbox('Vehicle tours')
-wlktr = st.checkbox('Walking tours')
-tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
-tags = []
-vchoice = 0
-
-st.write("\n")
-Ready = st.radio('Are you ready to find activities? ',['Not yet','Yes'])
-if Ready == 'Yes' and tagtotal > 3:
-    st.write('You Selected Too Many Tags')
-if Ready == 'Yes' and tagtotal == 0:
-    st.write('You Need To Select At Least One Tag')
-if Ready == 'Yes' and tagtotal < 4 and tagtotal > 0:
-    if boattr == True:
-        tags.append('boat tours')
-    if fdr == True:
-        tags.append('food and drink')
-    if lndm == True:
-        tags.append('landmarks')
-    if nat == True:
-        tags.append('nature')
-    if vehtr == True:
-        tags.append('vehicle tours')
-    if wlktr == True:
-        tags.append('walking tours')
-    def vacayitems(ctry, citty):
-        if len(tags) == 1:
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": f"""
-                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} involving {tags[0]}. Include a one to two sentence description.
-                        Format the list like this:
-                
-                        Attraction Name
-                        One to two sentence description
-                        """
-                    }
-                ],
-                temperature=0.8,
-                max_tokens=1000
-            )
-        if len(tags) == 2:
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": f"""
-                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} involving {tags[0]} and/or {tags[1]}. Include a one to two sentence description..
-                        Format the list like this:
-                
-                        Attraction Name
-                        One to two sentence description
-                        """
-                    }
-                ],
-                temperature=0.8,
-                max_tokens=1000
-            )
-        if len(tags) == 3:
-            tagone == tags[0]
-            tagtwo == tags[1]
-            tagthree == tags[2]
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": f"""
-                        Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Include a one to two sentence description, it's duration, and a link to the activity.
-                        Format the list like this:
-                
-                        Attraction Name
-                        The attraction's duration in hours
-                        One to two sentence description
-                        A link to the activity
-                        """
-                    }
-                ],
-                temperature=0.8,
-                max_tokens=1000
-            )
-        vacaylist = response.choices[0].message.content
-        return vacaylist
-    vacay = vacayitems(ctry, citty)
-    st.write(vacay)
-    st.subheader('Which activity are you choosing?')
-    vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'])
-    if vchoice == '1':
-        v = vacay
-        start = v.find("1. ") + 3
-        end = v.find("\n")
-        vv = v[start:end]
-        st.write(vv)
-    if vchoice == '2':
-        v = vacay
-        start = v.find("2. ") + 3
-        end = v.find("\n")
-        vv = v[start:end]
-        st.write(vv)
-    if vchoice == '3':
-        v = vacay
-        start = v.find("3. ") + 3
-        end = v.find("\n")
-        vv = v[start:end]
-        st.write(vv)
-    if vchoice == '4':
-        v = vacay
-        start = v.find("4. ") + 3
-        end = v.find("\n")
-        vv = v[start:end]
-        st.write(vv)
-    if vchoice == '5':
-        v = vacay
-        start = v.find("5. ") + 3
-        end = v.find("\n")
-        vv = v[start:end]
-        st.write(vv)
+st.subheader('When is your vacation?')
+st.write('Must be 2-7 days')
+fday = st.date_input('First day')
+lday = st.date_input('Last day')
+fdaysplit = str(fday).split('-')
+ldaysplit = str(lday).split('-')
+fdaynum = datetime.date(year = int(fdaysplit[0]), month = int(fdaysplit[1]), day = int(fdaysplit[2]))
+ldaynum = datetime.date(year = int(ldaysplit[0]), month = int(ldaysplit[1]), day = int(ldaysplit[2]))
+dur = (ldaynum-fdaynum).days
+if dur < 2:
+    st.write('Please make your vacation at least 2 days long')
+if dur > 7:
+    st.write('Please make your vacation less than 7 days long')
+if dur == 2:
+    day1, day2 = st.tabs(
+        ['Day 1 Plan', 'Day 2 Plan']
+    )
+    with day1:
+        st.subheader('What kind of activities are you looking for?')
+        st.write('Select up to three types of activities')
+        boattr = st.checkbox('Boat tours')
+        fdr = st.checkbox('Food and drink')
+        lndm = st.checkbox('Landmarks')
+        nat = st.checkbox('Nature')
+        vehtr = st.checkbox('Vehicle tours')
+        wlktr = st.checkbox('Walking tours')
+        tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
+        tags = []
+        vchoice = 0
+        Ready = st.radio('Are you ready to find activities?',['Not yet','Yes'])
+        if Ready == 'Yes' and tagtotal > 3:
+            st.write('You Selected Too Many Tags')
+        if Ready == 'Yes' and tagtotal == 0:
+            st.write('You Need To Select At Least One Tag')
+        if Ready == 'Yes' and tagtotal < 4 and tagtotal > 0:
+            if boattr == True:
+                tags.append('boat tours')
+            if fdr == True:
+                tags.append('food and drink')
+            if lndm == True:
+                tags.append('landmarks')
+            if nat == True:
+                tags.append('nature')
+            if vehtr == True:
+                tags.append('vehicle tours')
+            if wlktr == True:
+                tags.append('walking tours')
+            vacay = vacayitems(ctry,citty,fday)
+            st.write(vacay)
+            st.subheader('Which activity are you choosing?')
+            vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'])
+            actchoice(vchoice)
