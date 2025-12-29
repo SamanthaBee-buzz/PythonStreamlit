@@ -84,7 +84,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice,tags):
     return vacaylist
     
 
-def actchoice(vchoice):
+def actchoice(vchoice,vacay):
     vsl = ''
     if vchoice == '1':
         start = vacay.find("{vchoice}. ") + 3
@@ -108,21 +108,20 @@ def actchoice(vchoice):
         vsl = vacay[start:end]
     return vsl
 
-def dayvac(fday,ctry,citty):
-    fdaygpt = fday
+def dayvac(fdaygpt,ctry,citty,keynum):
     st.subheader('What kind of activities are you looking for?')
     st.write('Select up to three types of activities')
-    boattr = st.checkbox('Boat tours', key = 'bo1')
-    fdr = st.checkbox('Food and drink', key = 'fd1')
-    lndm = st.checkbox('Landmarks', key = 'ln1')
-    nat = st.checkbox('Nature', key = 'na1')
-    vehtr = st.checkbox('Vehicle tours', key = 've1')
-    wlktr = st.checkbox('Walking tours', key = 'wl1')
+    boattr = st.checkbox('Boat tours', key = f'boa{keynum}')
+    fdr = st.checkbox('Food and drink', key = f'fdr{keynum}')
+    lndm = st.checkbox('Landmarks', key = f'lnd{keynum}')
+    nat = st.checkbox('Nature', key = f'nat{keynum}')
+    vehtr = st.checkbox('Vehicle tours', key = f'veh{keynum}')
+    wlktr = st.checkbox('Walking tours', key = f'wlk{keynum}')
     tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
     tags = []
     vchoice = 0
-    longchoice = st.radio('How long do you want this activity to be?', ["I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = 'lo1')
-    Ready = st.radio('Are you ready to find activities?',['Not yet','Yes'], key = 're1')
+    longchoice = st.radio('How long do you want this activity to be?', ["I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'lon{keynum}')
+    Ready = st.radio(f'Are you ready to find activities for {fdaygpt}?',['Not yet','Yes'], key = f'rea{keynum}')
     if Ready == 'Yes' and tagtotal > 3:
         st.write('You Selected Too Many Tags')
     if Ready == 'Yes' and tagtotal == 0:
@@ -143,9 +142,10 @@ def dayvac(fday,ctry,citty):
         vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags)
         st.write(vacay)
         st.subheader('Which activity are you choosing?')
-        vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'], key = 'vc1')
-        vacselect = actchoice(vchoice)
+        vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'], key = f'vch{keynum}')
+        vacselect = actchoice(vchoice,vacay)
         st.write(vacselect)
+        return(vacselect)
 
 ctry =  st.selectbox('Select a country:', ['Albania','Austria','Belarus','Belgium',
     'Bosnia and Herzegovina','Bulgaria','Croatia','Czechia','Denmark','Estonia',
@@ -245,42 +245,70 @@ if dur == 2:
         ['Day 1 Plan', 'Day 2 Plan']
     )
     with day1:
-        day1vac(fday,ctry,citty)
+        keynum = 21
+        fdaygpt = fday
+        dayvac(fdaygpt,ctry,citty,keynum)
     with day2:
+        keynum = 22
         fdaygpt = fday + timedelta(days=1)
-        st.subheader('What kind of activities are you looking for?')
-        st.write('Select up to three types of activities')
-        boattr = st.checkbox('Boat tours', key = 'bo2')
-        fdr = st.checkbox('Food and drink', key = 'fd2')
-        lndm = st.checkbox('Landmarks', key = 'ln2')
-        nat = st.checkbox('Nature', key = 'na2')
-        vehtr = st.checkbox('Vehicle tours', key = 've2')
-        wlktr = st.checkbox('Walking tours', key = 'wl2')
-        tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
-        tags = []
-        vchoice = 0
-        longchoice = st.radio('How long do you want this activity to be?', ["I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = 'lo2')
-        Ready = st.radio('Are you ready to find activities?',['Not yet','Yes'], key = 're2')
-        if Ready == 'Yes' and tagtotal > 3:
-            st.write('You Selected Too Many Tags')
-        if Ready == 'Yes' and tagtotal == 0:
-            st.write('You Need To Select At Least One Tag')
-        if Ready == 'Yes' and tagtotal < 4 and tagtotal > 0:
-            if boattr == True:
-                tags.append('boat tours')
-            if fdr == True:
-                tags.append('food and drink')
-            if lndm == True:
-                tags.append('landmarks')
-            if nat == True:
-                tags.append('nature')
-            if vehtr == True:
-                tags.append('vehicle tours')
-            if wlktr == True:
-                tags.append('walking tours')
-            vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags)
-            st.write(vacay)
-            st.subheader('Which activity are you choosing?')
-            vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'], key = 'vc1')
-            vacselect = actchoice(vchoice)
-            st.write(vacselect)
+        dayvac(fdaygpt,ctry,citty,keynum)
+elif dur == 3:
+    day1, day2, day3 = st.tabs(
+        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan']
+    )
+    with day1:
+        keynum = 31
+        fdaygpt = fday
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day2:
+        keynum = 32
+        fdaygpt = fday + timedelta(days=1)
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day3:
+        keynum = 33
+        fdaygpt = fday + timedelta(days=2)
+        dayvac(fdaygpt,ctry,citty,keynum)
+elif dur == 4:
+    day1, day2, day3, day4 = st.tabs(
+        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan', 'Day 4 Plan']
+    )
+    with day1:
+        keynum = 41
+        fdaygpt = fday
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day2:
+        keynum = 42
+        fdaygpt = fday + timedelta(days=1)
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day3:
+        keynum = 43
+        fdaygpt = fday + timedelta(days=2)
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day4:
+        keynum = 44
+        fdaygpt = fday + timedelta(days=3)
+        dayvac(fdaygpt,ctry,citty,keynum)
+elif dur == 5:
+    day1, day2, day3, day4, day5 = st.tabs(
+        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan', 'Day 4 Plan', 'Day 5 Plan']
+    )
+    with day1:
+        keynum = 51
+        fdaygpt = fday
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day2:
+        keynum = 52
+        fdaygpt = fday + timedelta(days=1)
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day3:
+        keynum = 53
+        fdaygpt = fday + timedelta(days=2)
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day4:
+        keynum = 54
+        fdaygpt = fday + timedelta(days=3)
+        dayvac(fdaygpt,ctry,citty,keynum)
+    with day5:
+        keynum = 545
+        fdaygpt = fday + timedelta(days=4)
+        dayvac(fdaygpt,ctry,citty,keynum)
