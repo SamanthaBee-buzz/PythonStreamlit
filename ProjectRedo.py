@@ -11,8 +11,8 @@ from datetime import timedelta
 client = OpenAI(api_key=KEYHERE)
 st.markdown("<h1 style='text-align: center; color: white;'>Plan Your European Vacation</h1>", unsafe_allow_html=True)
 
-
-def vacayitems(ctry, citty, fdaygpt, longchoice):
+@st.cache_data
+def vacayitems(ctry, citty, fdaygpt, longchoice,tags):
     if longchoice == "I'm not picky":
         longchoice == '1-6 hours'
     if len(tags) == 1:
@@ -22,7 +22,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Make sure they are {longchoice} long. Include a one to two sentence description and its duration.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Make sure they are {longchoice} long. Include a one to two sentence description and its duration in hours.
                     Format the list like this:
             
                     Attraction Name
@@ -43,7 +43,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Make sure they are {longchoice} long. Include a one to two sentence description and its duration.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Make sure they are {longchoice} long. Include a one to two sentence description and its duration in hours.
                     Format the list like this:       
 
                     Attraction Name
@@ -64,7 +64,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Make sure they are {longchoice} long. Include a one to two sentence description and its duration.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Make sure they are {longchoice} long. Include a one to two sentence description and its duration in hours.
                     Format the list like this:
                 
                     Attraction Name
@@ -82,34 +82,70 @@ def vacayitems(ctry, citty, fdaygpt, longchoice):
     pos = vacaylist.find('1.')
     vacaylist = vacaylist[pos:]
     return vacaylist
+    
 
 def actchoice(vchoice):
+    vsl = ''
     if vchoice == '1':
-        start = vacay.find("1. ") + 3
-        end = vacay.find("\n")
-        vv = vacay[start:end]
-        st.write(vv)
+        start = vacay.find("{vchoice}. ") + 3
+        end = vacay.find("\n", start)
+        vsl = vacay[start:end]
     if vchoice == '2':
         start = vacay.find("2. ") + 3
-        end = vacay.find("\n")
-        vv = vacay[start:end]
-        st.write(vv)
+        end = vacay.find("\n", start)
+        vsl = vacay[start:end]
     if vchoice == '3':
         start = vacay.find("3. ") + 3
-        end = vacay.find("\n")
-        vv = vacay[start:end]
-        st.write(vv)
+        end = vacay.find("\n", start)
+        vsl = vacay[start:end]
     if vchoice == '4':
         start = vacay.find("4. ") + 3
-        end = vacay.find("\n")
-        vv = vacay[start:end]
-        st.write(vv)
+        end = vacay.find("\n", start)
+        vsl = vacay[start:end]
     if vchoice == '5':
         start = vacay.find("5. ") + 3
-        end = vacay.find("\n")
-        vv = vacay[start:end]
-        st.write(vv)
+        end = vacay.find("\n", start)
+        vsl = vacay[start:end]
+    return vsl
 
+def dayvac(fday,ctry,citty):
+    fdaygpt = fday
+    st.subheader('What kind of activities are you looking for?')
+    st.write('Select up to three types of activities')
+    boattr = st.checkbox('Boat tours', key = 'bo1')
+    fdr = st.checkbox('Food and drink', key = 'fd1')
+    lndm = st.checkbox('Landmarks', key = 'ln1')
+    nat = st.checkbox('Nature', key = 'na1')
+    vehtr = st.checkbox('Vehicle tours', key = 've1')
+    wlktr = st.checkbox('Walking tours', key = 'wl1')
+    tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
+    tags = []
+    vchoice = 0
+    longchoice = st.radio('How long do you want this activity to be?', ["I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = 'lo1')
+    Ready = st.radio('Are you ready to find activities?',['Not yet','Yes'], key = 're1')
+    if Ready == 'Yes' and tagtotal > 3:
+        st.write('You Selected Too Many Tags')
+    if Ready == 'Yes' and tagtotal == 0:
+        st.write('You Need To Select At Least One Tag')
+    if Ready == 'Yes' and tagtotal < 4 and tagtotal > 0:
+        if boattr == True:
+            tags.append('boat tours')
+        if fdr == True:
+            tags.append('food and drink')
+        if lndm == True:
+            tags.append('landmarks')
+        if nat == True:
+            tags.append('nature')
+        if vehtr == True:
+            tags.append('vehicle tours')
+        if wlktr == True:
+            tags.append('walking tours')
+        vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags)
+        st.write(vacay)
+        st.subheader('Which activity are you choosing?')
+        vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'], key = 'vc1')
+        vacselect = actchoice(vchoice)
+        st.write(vacselect)
 
 ctry =  st.selectbox('Select a country:', ['Albania','Austria','Belarus','Belgium',
     'Bosnia and Herzegovina','Bulgaria','Croatia','Czechia','Denmark','Estonia',
@@ -209,42 +245,7 @@ if dur == 2:
         ['Day 1 Plan', 'Day 2 Plan']
     )
     with day1:
-        fdaygpt = fday
-        st.subheader('What kind of activities are you looking for?')
-        st.write('Select up to three types of activities')
-        boattr = st.checkbox('Boat tours', key = 'bo1')
-        fdr = st.checkbox('Food and drink', key = 'fd1')
-        lndm = st.checkbox('Landmarks', key = 'ln1')
-        nat = st.checkbox('Nature', key = 'na1')
-        vehtr = st.checkbox('Vehicle tours', key = 've1')
-        wlktr = st.checkbox('Walking tours', key = 'wl1')
-        tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
-        tags = []
-        vchoice = 0
-        longchoice = st.radio('How long do you want this activity to be?', ["I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = 'lo1')
-        Ready = st.radio('Are you ready to find activities?',['Not yet','Yes'], key = 're1')
-        if Ready == 'Yes' and tagtotal > 3:
-            st.write('You Selected Too Many Tags')
-        if Ready == 'Yes' and tagtotal == 0:
-            st.write('You Need To Select At Least One Tag')
-        if Ready == 'Yes' and tagtotal < 4 and tagtotal > 0:
-            if boattr == True:
-                tags.append('boat tours')
-            if fdr == True:
-                tags.append('food and drink')
-            if lndm == True:
-                tags.append('landmarks')
-            if nat == True:
-                tags.append('nature')
-            if vehtr == True:
-                tags.append('vehicle tours')
-            if wlktr == True:
-                tags.append('walking tours')
-            vacay = vacayitems(ctry,citty,fdaygpt,longchoice)
-            st.write(vacay)
-            st.subheader('Which activity are you choosing?')
-            vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'], key = 'vc1')
-            st.write(actchoice(vchoice))
+        day1vac(fday,ctry,citty)
     with day2:
         fdaygpt = fday + timedelta(days=1)
         st.subheader('What kind of activities are you looking for?')
@@ -277,8 +278,9 @@ if dur == 2:
                 tags.append('vehicle tours')
             if wlktr == True:
                 tags.append('walking tours')
-            vacay = vacayitems(ctry,citty,fdaygpt,longchoice)
+            vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags)
             st.write(vacay)
             st.subheader('Which activity are you choosing?')
-            vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'], key = 'vc2')
-            actchoice(vchoice)
+            vchoice = st.radio("Choose the number that matches the activity's list number", ['Not sure yet','1','2','3','4','5'], key = 'vc1')
+            vacselect = actchoice(vchoice)
+            st.write(vacselect)
