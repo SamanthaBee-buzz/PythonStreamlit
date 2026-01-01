@@ -215,7 +215,7 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist):
         if actnum == 1:
             st.subheader('Activity 1')
             longchoice = st.radio('How long do you want the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
-            if longchoice == "I'm not picky" or longchoice == '1-2 hours' or longchoice == '2-4 hours' or longchoice == '4-6 hours':
+            if longchoice != 'Not sure yet':
                 if repeatlist == []:
                     vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags)
                 else:
@@ -227,21 +227,19 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist):
         if actnum == 2:
             st.subheader('Activity 1')
             longchoice = st.radio('How long do you want the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
-            if longchoice == "I'm not picky" or longchoice == '1-2 hours' or longchoice == '2-4 hours' or longchoice == '4-6 hours':
+            if longchoice != 'Not sure yet':
                 if repeatlist == []:
                     vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags)
                 else:
                     vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist)
                 st.write(vacay)
                 vchoice = st.radio('What will the first activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch1{keynum}')
-                if vchoice == 'Not sure yet':
-                    pass
-                else:
+                if vchoice != 'Not sure yet':
                     vacselect = actchoice(vchoice,vacay)
                     repeatlist.append(vacselect)
                     st.subheader('Activity 2')
                     longchoice = st.radio('How long do you want the second activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len2{keynum}')
-                    if longchoice == "I'm not picky" or longchoice == '1-2 hours' or longchoice == '2-4 hours' or longchoice == '4-6 hours':
+                    if longchoice != 'Not sure yet':
                         vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist)
                         st.write(vacay)
                         vchoice = st.radio('What will the second activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch2{keynum}')
@@ -250,32 +248,28 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist):
         if actnum == 3:
             st.subheader('Activity 1')
             longchoice = st.radio('How long do you the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
-            if longchoice == "I'm not picky" or longchoice == '1-2 hours' or longchoice == '2-4 hours' or longchoice == '4-6 hours':
+            if longchoice != 'Not sure yet':
                 if repeatlist == []:
                     vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags)
                 else:
                     vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist)
                 st.write(vacay)
                 vchoice = st.radio('What will the first activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch1{keynum}')
-                if vchoice == 'Not sure yet':
-                    pass
-                else:
+                if vchoice != 'Not sure yet':
                     vacselect = actchoice(vchoice,vacay)
                     repeatlist.append(vacselect)
                     st.subheader('Activity 2')
                     longchoice = st.radio('How long do you the second activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len2{keynum}')
-                    if longchoice == "I'm not picky" or longchoice == '1-2 hours' or longchoice == '2-4 hours' or longchoice == '4-6 hours':
+                    if longchoice != 'Not sure yet':
                         vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist)
                         st.write(vacay)
                         vchoice = st.radio('What will the second activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch2{keynum}')
-                        if vchoice == 'Not sure yet':
-                            pass
-                        else:
+                        if vchoice != 'Not sure yet':
                             vacselect = actchoice(vchoice,vacay)
                             repeatlist.append(vacselect)
                             st.subheader('Activity 3')
                             longchoice = st.radio('How long do you the third activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len3{keynum}')
-                            if longchoice == "I'm not picky" or longchoice == '1-2 hours' or longchoice == '2-4 hours' or longchoice == '4-6 hours':
+                            if longchoice != 'Not sure yet':
                                 vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist)
                                 st.write(vacay)
                                 vchoice = st.radio('What will the third activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch3{keynum}')
