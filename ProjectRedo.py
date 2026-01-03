@@ -12,7 +12,7 @@ client = OpenAI(api_key=KEYHERE)
 st.markdown("<h1 style='text-align: center; color: white;'>Plan Your European Vacation</h1>", unsafe_allow_html=True)
 
 @st.cache_data
-def vacayitems(ctry, citty, fdaygpt, longchoice,tags,repeatlist,time):
+def vacayitems(ctry, citty, fdaygpt, longchoice,tags,repeatlist,timey):
     if longchoice == "I'm not picky":
         longchoice == '1-6 hours'
     if len(tags) == 1:
@@ -22,7 +22,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice,tags,repeatlist,time):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Do not include {repeatlist}. Make sure they are {longchoice} long and start at {time}. Include a one to two sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Do not include {repeatlist}. Make sure they are {longchoice} long and start at {timey}. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
                     Format the list like this:
             
                     Attraction Name
@@ -43,7 +43,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice,tags,repeatlist,time):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Do not include {repeatlist}. Make sure they are {longchoice} long and start at {time}. Include a one to two sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Do not include {repeatlist}. Make sure they are {longchoice} long and start at {timey}. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
                     Format the list like this:       
 
                     Attraction Name
@@ -64,7 +64,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice,tags,repeatlist,time):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Do not include {repeatlist}. Make sure they are {longchoice} long and start at {time}. Include a one to two sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Do not include {repeatlist}. Make sure they are {longchoice} long and start at {timey}. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
                     Format the list like this:
                 
                     Attraction Name
@@ -84,7 +84,7 @@ def vacayitems(ctry, citty, fdaygpt, longchoice,tags,repeatlist,time):
     return vacaylist
 
 @st.cache_data
-def vacayitemsactone(ctry, citty, fdaygpt, longchoice,tags,time):
+def vacayitemsactone(ctry, citty, fdaygpt, longchoice,tags,timey):
     if longchoice == "I'm not picky":
         longchoice == '1-6 hours'
     if len(tags) == 1:
@@ -94,7 +94,7 @@ def vacayitemsactone(ctry, citty, fdaygpt, longchoice,tags,time):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Make sure they are {longchoice} long and start at {time}. Include a one to two sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Make sure they are {longchoice} long and start at {timey}. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
                     Format the list like this:
             
                     Attraction Name
@@ -115,7 +115,7 @@ def vacayitemsactone(ctry, citty, fdaygpt, longchoice,tags,time):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Make sure they are {longchoice} long and start at {time}. Include a one to two sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Make sure they are {longchoice} long and start at {timey}. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
                     Format the list like this:       
 
                     Attraction Name
@@ -136,7 +136,7 @@ def vacayitemsactone(ctry, citty, fdaygpt, longchoice,tags,time):
                 {
                     "role": "user",
                     "content": f"""
-                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Make sure they are {longchoice} long and start at {time}. Include a one to two sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
+                    Make a list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Make sure they are {longchoice} long and start at {timey}. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate.
                     Format the list like this:
                 
                     Attraction Name
@@ -157,16 +157,7 @@ def vacayitemsactone(ctry, citty, fdaygpt, longchoice,tags,time):
     
 def actdur(vchoice,vacay):
     cdur = ""
-    if vchoice == '1':
-        start = vacay.find("1.")
-    if vchoice == '2':
-        start = vacay.find("2.")
-    if vchoice == '3':
-        start = vacay.find("3.")
-    if vchoice == '4':
-        start = vacay.find("4.")
-    if vchoice == '5':
-        start = vacay.find("5.")
+    start = vacay.find(f"{vchoice}.")
     end = vacay.find("hours", start)
     c = vacay[start:end]
     start = c.find("Duration:")
@@ -174,21 +165,12 @@ def actdur(vchoice,vacay):
     cdur = c[start:end]
     cdur = cdur[10:len(cdur)]
     cdur.strip()
-    cdur = int(cdur)
+    cdur = float(cdur)
     return cdur
 
 def actchoice(vchoice,vacay):
     vsl = ''
-    if vchoice == '1':
-        start = vacay.find("1. ") + 3
-    if vchoice == '2':
-        start = vacay.find("2. ") + 3
-    if vchoice == '3':
-        start = vacay.find("3. ") + 3
-    if vchoice == '4':
-        start = vacay.find("4. ") + 3
-    if vchoice == '5':
-        start = vacay.find("5. ") + 3
+    start = vacay.find(f"{vchoice}. ") + 3
     end = vacay.find("\n", start)
     vsl = vacay[start:end]
     return vsl
@@ -204,8 +186,8 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist):
     wlktr = st.checkbox('Walking tours', key = f'wlk{keynum}')
     tagtotal = boattr + fdr + lndm + nat + vehtr + wlktr
     tags = []
-    time = datetime.time(5, 00)
-    stime = 10
+    timehr = 10
+    timemin = 0
     vchoice = 0
     actnum = 0
     actnum =  int(st.selectbox(f'How many activities will you do on {fdaygpt}?', ['1','2','3'], key = f'act{keynum}'))
@@ -229,75 +211,102 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist):
             tags.append('walking tours')
         if actnum == 1:
             st.subheader('Activity 1')
-            time = st.slider("When will this activity start?", datetime.time(stime,00), datetime.time(22,00), key = f'time1{keynum}')
+            timey = st.slider("When will this activity start?", time(timehr,timemin), time(22,00), step = timedelta(minutes = 30), key = f'time1{keynum}')
             longchoice = st.radio('How long do you want this activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
             if longchoice != 'Not sure yet':
                 if repeatlist == []:
-                    vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags,time)
+                    vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags,timey)
                 else:
-                    vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,time)
+                    vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                 st.write(vacay)
                 vchoice = st.radio('What will this activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch1{keynum}')
                 vacselect = actchoice(vchoice,vacay)
                 repeatlist.append(vacselect)
         if actnum == 2:
             st.subheader('Activity 1')
-            time = st.slider("When will the first activity start?", datetime.time(stime,00), datetime.time(22,00), key = f'time1{keynum}')
+            timey = st.slider("When will the first activity start?", time(timehr,timemin), time(22,00), step = timedelta(minutes = 30), key = f'time1{keynum}')
             longchoice = st.radio('How long do you want the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
             if longchoice != 'Not sure yet':
                 if repeatlist == []:
-                    vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags,time)
+                    vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags,timey)
                 else:
-                    vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,time)
+                    vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                 st.write(vacay)
                 vchoice = st.radio('What will the first activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch1{keynum}')
                 if vchoice != 'Not sure yet':
                     vacselect = actchoice(vchoice,vacay)
                     repeatlist.append(vacselect)
                     ddur = actdur(vchoice,vacay)
-                    stime = stime + ddur + 1
+                    decdur = isinstance(ddur,float)
+                    if decdur and timemin == 0:
+                        timehr = timehr + ddur + .5
+                        timemin = timemin + 30
+                    elif decdur and timemin == 30:
+                        timehr = timehr + ddur + .5
+                        timemin = timemin - 30
+                    else:
+                        timehr = timehr + ddur + 1
+                    timehr = int(timehr)
                     st.subheader('Activity 2')
-                    time = st.slider("When will the second activity start?", datetime.time(stime,00), datetime.time(22,00), key = f'time2{keynum}')
+                    timey = st.slider("When will the second activity start?", time(timehr,timemin), time(22,00), step = timedelta(minutes = 30), key = f'time2{keynum}')
                     longchoice = st.radio('How long do you want the second activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len2{keynum}')
                     if longchoice != 'Not sure yet':
-                        vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,time)
+                        vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                         st.write(vacay)
                         vchoice = st.radio('What will the second activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch2{keynum}')
                         vacselect = actchoice(vchoice,vacay)
                         repeatlist.append(vacselect)
         if actnum == 3:
             st.subheader('Activity 1')
-            time = st.slider("When will the first activity start?", datetime.time(stime,00), datetime.time(22,00), key = f'time1{keynum}')
+            timey = st.slider("When will the first activity start?", time(timehr,timemin), time(22,00), key = f'time1{keynum}')
             longchoice = st.radio('How long do you the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
             if longchoice != 'Not sure yet':
                 if repeatlist == []:
-                    vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags,time)
+                    vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags,timey)
                 else:
-                    vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,time)
+                    vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                 st.write(vacay)
                 vchoice = st.radio('What will the first activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch1{keynum}')
                 if vchoice != 'Not sure yet':
                     vacselect = actchoice(vchoice,vacay)
                     repeatlist.append(vacselect)
                     ddur = actdur(vchoice,vacay)
-                    stime = stime + ddur + 1
+                    decdur = isinstance(ddur,float)
+                    if decdur and timemin == 0:
+                        timehr = timehr + ddur + .5
+                        timemin = timemin + 30
+                    elif decdur and timemin == 30:
+                        timehr = timehr + ddur + .5
+                        timemin = timemin - 30
+                    else:
+                        timehr = timehr + ddur + 1
+                    timehr = int(timehr)
                     st.subheader('Activity 2')
-                    time = st.slider("When will the second activity start?", datetime.time(stime,00), datetime.time(22,00), key = f'time2{keynum}')
+                    timey = st.slider("When will the second activity start?", time(timehr,timemin), time(22,00), key = f'time2{keynum}')
                     longchoice = st.radio('How long do you the second activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len2{keynum}')
                     if longchoice != 'Not sure yet':
-                        vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,time)
+                        vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                         st.write(vacay)
                         vchoice = st.radio('What will the second activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch2{keynum}')
                         if vchoice != 'Not sure yet':
                             vacselect = actchoice(vchoice,vacay)
                             repeatlist.append(vacselect)
                             ddur = actdur(vchoice,vacay)
-                            stime = stime + ddur + 1
+                            decdur = isinstance(ddur,float)
+                            if decdur and timemin == 0:
+                                timehr = timehr + ddur + .5
+                                timemin = timemin + 30
+                            elif decdur and timemin == 30:
+                                timehr = timehr + ddur + .5
+                                timemin = timemin - 30
+                            else:
+                                timehr = timehr + ddur + 1
+                            timehr = int(timehr)
                             st.subheader('Activity 3')
-                            time = st.slider("When will the third activity start?", datetime.time(stime,00), datetime.time(22,00), key = f'time3{keynum}')
+                            timey = st.slider("When will the third activity start?", time(timehr,timemin), time(22,00), key = f'time3{keynum}')
                             longchoice = st.radio('How long do you the third activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len3{keynum}')
                             if longchoice != 'Not sure yet':
-                                vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,time)
+                                vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                                 st.write(vacay)
                                 vchoice = st.radio('What will the third activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch3{keynum}')
                                 vacselect = actchoice(vchoice,vacay)
@@ -388,11 +397,7 @@ st.subheader('When is your vacation?')
 st.write('Must be 2-5 days')
 fday = st.date_input('First day')
 lday = st.date_input('Last day')
-fdaysplit = str(fday).split('-')
-ldaysplit = str(lday).split('-')
-fdaynum = datetime.date(year = int(fdaysplit[0]), month = int(fdaysplit[1]), day = int(fdaysplit[2]))
-ldaynum = datetime.date(year = int(ldaysplit[0]), month = int(ldaysplit[1]), day = int(ldaysplit[2]))
-dur = (ldaynum-fdaynum).days
+dur = (lday-fday).days
 if dur < 2:
     st.write('Please make your vacation at least 2 days long')
 if dur > 5:
@@ -410,6 +415,7 @@ if dur == 2:
         keynum = 22
         fdaygpt = fday + timedelta(days=1)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+    st.write(repeatlist)
 elif dur == 3:
     day1, day2, day3 = st.tabs(
         ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan']
@@ -473,5 +479,6 @@ elif dur == 5:
         keynum = 55
         fdaygpt = fday + timedelta(days=4)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+
 
 
