@@ -473,8 +473,5 @@ elif dur == 5:
         keynum = 55
         fdaygpt = fday + timedelta(days=4)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
-    with day5:
-        keynum = 545
-        fdaygpt = fday + timedelta(days=4)
-        dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+
 
