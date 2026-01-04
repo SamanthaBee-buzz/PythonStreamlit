@@ -214,6 +214,7 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times):
             timey = st.slider("When will the first activity start?", time(th,tm), time(22,00), step = timedelta(minutes = 30), key = f'time1{keynum}')
             th = timey.hour
             tm = timey.minute
+            times.append(f'{th}:{tm}')
             longchoice = st.radio('How long do you want the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
             if longchoice != 'Not sure yet':
                 if repeatlist == []:
@@ -225,6 +226,7 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times):
                 if vchoice != 'Not sure yet':
                     vacselect = actchoice(vchoice,vacay)
                     repeatlist.append(vacselect)
+                    actlist.append(vacselect)
                     ddur = actdur(vchoice,vacay)
                     decdur = isinstance(ddur,float)
                     if decdur and tm == 0:
@@ -235,6 +237,10 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times):
                         tm = tm - 30
                     else:
                         th = th + ddur
+                        tm = tm
+                    th = int(th)
+                    tm = int(tm)
+                    times.append(f'{th}:{tm}')
         if actnum == 2:
             st.subheader('Activity 1')
             timey = st.slider("When will the first activity start?", time(th,tm), time(22,00), step = timedelta(minutes = 30), key = f'time1{keynum}')
@@ -277,26 +283,30 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times):
                         vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                         st.write(vacay)
                         vchoice = st.radio('What will the second activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch2{keynum}')
-                        vacselect = actchoice(vchoice,vacay)
-                        repeatlist.append(vacselect)
-                        actlist.append(vacselect)
-                        decdur = isinstance(ddur,float)
-                        if decdur and tm == 0:
-                            th = th + ddur + .5
-                            tm = tm + 30
-                        elif decdur and tm == 30:
-                            th = th + ddur + .5
-                            tm = tm - 30
-                        else:
-                            th = th + ddur
-                            tm = tm
-                        th = int(th)
-                        tm = int(tm)
-                        times.append(f'{th}:{tm}')
+                        if vchoice != 'Not sure yet':
+                            vacselect = actchoice(vchoice,vacay)
+                            repeatlist.append(vacselect)
+                            actlist.append(vacselect)
+                            decdur = isinstance(ddur,float)
+                            if decdur and tm == 0:
+                                th = th + ddur + .5
+                                tm = tm + 30
+                            elif decdur and tm == 30:
+                                th = th + ddur + .5
+                                tm = tm - 30
+                            else:
+                                th = th + ddur
+                                tm = tm
+                            th = int(th)
+                            tm = int(tm)
+                            times.append(f'{th}:{tm}')
         if actnum == 3:
             st.subheader('Activity 1')
-            timey = st.slider("When will the first activity start?", time(timehr,timemin), time(22,00), key = f'time1{keynum}')
-            longchoice = st.radio('How long do you the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
+            timey = st.slider("When will the first activity start?", time(th,tm), time(22,00), step = timedelta(minutes = 30), key = f'time1{keynum}')
+            th = timey.hour
+            tm = timey.minute
+            times.append(f'{th}:{tm}')
+            longchoice = st.radio('How long do you want the first activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len1{keynum}')
             if longchoice != 'Not sure yet':
                 if repeatlist == []:
                     vacay = vacayitemsactone(ctry,citty,fdaygpt,longchoice,tags,timey)
@@ -310,20 +320,24 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times):
                     actlist.append(vacselect)
                     ddur = actdur(vchoice,vacay)
                     decdur = isinstance(ddur,float)
-                    if decdur and timemin == 0:
-                        timehr = timehr + ddur + .5
-                        timemin = timemin + 30
-                    elif decdur and timemin == 30:
-                        timehr = timehr + ddur + .5
-                        timemin = timemin - 30
+                    if decdur and tm == 0:
+                        th = th + ddur + .5
+                        tm = tm + 30
+                    elif decdur and tm == 30:
+                        th = th + ddur + .5
+                        tm = tm - 30
                     else:
-                        timehr = timehr + ddur + 1
-                    timehr = int(timehr)
-                    times.append(f'{timehr}:{timemin}')
+                        th = th + ddur
+                        tm = tm
+                    th = int(th)
+                    tm = int(tm)
+                    times.append(f'{th}:{tm}')
                     st.subheader('Activity 2')
-                    timey = st.slider("When will the second activity start?", time(timehr,timemin), time(22,00), key = f'time2{keynum}')
-                    times.append(f'{timehr}:{timemin}')
-                    longchoice = st.radio('How long do you the second activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len2{keynum}')
+                    timey = st.slider("When will the second activity start?", time((th+1),tm), time(22,00), step = timedelta(minutes = 30), key = f'time2{keynum}')
+                    th = timey.hour
+                    tm = timey.minute
+                    times.append(f'{th}:{tm}')
+                    longchoice = st.radio('How long do you want the second activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len2{keynum}')
                     if longchoice != 'Not sure yet':
                         vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                         st.write(vacay)
@@ -332,42 +346,66 @@ def dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times):
                             vacselect = actchoice(vchoice,vacay)
                             repeatlist.append(vacselect)
                             actlist.append(vacselect)
-                            ddur = actdur(vchoice,vacay)
                             decdur = isinstance(ddur,float)
-                            if decdur and timemin == 0:
-                                timehr = timehr + ddur + .5
-                                timemin = timemin + 30
-                            elif decdur and timemin == 30:
-                                timehr = timehr + ddur + .5
-                                timemin = timemin - 30
+                            if decdur and tm == 0:
+                                th = th + ddur + .5
+                                tm = tm + 30
+                            elif decdur and tm == 30:
+                                th = th + ddur + .5
+                                tm = tm - 30
                             else:
-                                timehr = timehr + ddur + 1
-                            timehr = int(timehr)
-                            times.append(f'{timehr}:{timemin}')
+                                th = th + ddur
+                                tm = tm
+                            th = int(th)
+                            tm = int(tm)
+                            times.append(f'{th}:{tm}')
                             st.subheader('Activity 3')
-                            timey = st.slider("When will the third activity start?", time(timehr,timemin), time(22,00), key = f'time3{keynum}')
-                            times.append(f'{timehr}:{timemin}')
-                            longchoice = st.radio('How long do you the third activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len3{keynum}')
+                            timey = st.slider("When will the third activity start?", time((th+1),tm), time(22,00), step = timedelta(minutes = 30), key = f'time3{keynum}')
+                            th = timey.hour
+                            tm = timey.minute
+                            times.append(f'{th}:{tm}')
+                            longchoice = st.radio('How long do you want the third activity to be?', ['Not sure yet',"I'm not picky",'1-2 hours','2-4 hours','4-6 hours'], key = f'len3{keynum}')
                             if longchoice != 'Not sure yet':
                                 vacay = vacayitems(ctry,citty,fdaygpt,longchoice,tags,repeatlist,timey)
                                 st.write(vacay)
                                 vchoice = st.radio('What will the third activity be?', ['Not sure yet','1','2','3','4','5'], key = f'vch3{keynum}')
-                                vacselect = actchoice(vchoice,vacay)
-                                repeatlist.append(vacselect)
-                                actlist.append(vacselect)
-                                ddur = actdur(vchoice,vacay)
-                                decdur = isinstance(ddur,float)
-                                if decdur and timemin == 0:
-                                    timehr = timehr + ddur - 1.5
-                                    timemin = timemin + 30
-                                elif decdur and timemin == 30:
-                                    timehr = timehr + ddur - 1.5
-                                    timemin = timemin - 30
-                                else:
-                                    timehr = timehr + ddur - 1
-                                    timehr = int(timehr)
-                                times.append(f'{timehr}:{timemin}')
+                                if vchoice != 'Not sure yet':
+                                    vacselect = actchoice(vchoice,vacay)
+                                    repeatlist.append(vacselect)
+                                    actlist.append(vacselect)
+                                    decdur = isinstance(ddur,float)
+                                    if decdur and tm == 0:
+                                        th = th + ddur + .5
+                                        tm = tm + 30
+                                    elif decdur and tm == 30:
+                                        th = th + ddur + .5
+                                        tm = tm - 30
+                                    else:
+                                        th = th + ddur
+                                        tm = tm
+                                    th = int(th)
+                                    tm = int(tm)
+                                    times.append(f'{th}:{tm}')
     return(repeatlist)
+
+def vacsched(actlist,times):
+    vacschedtable = pd.DataFrame({'A' : []})
+    if len(actlist) == 1:
+        vacschedtable = pd.DataFrame(
+        {"Activity 1": [actlist[0], times[0], times[1]]},
+        index = ["Activity Name", "Start time", "End Time"])
+    elif len(actlist) == 2:
+        vacschedtable = pd.DataFrame(
+        {"Activity 1": [actlist[0], times[0], times[1]],
+        "Activity 2": [actlist[1], times[2], times[3]]},
+        index = ["Activity Name", "Start time", "End Time"])
+    elif len(actlist) == 3:
+        vacschedtable = pd.DataFrame(
+        {"Activity 1": [actlist[0], times[0], times[1]],
+        "Activity 2": [actlist[1], times[2], times[3]],
+        "Activity 3": [actlist[2], times[4], times[5]]},
+        index = ["Activity Name", "Start time", "End Time"])
+    return(vacschedtable)
 
 ctry =  st.selectbox('Select a country:', ['Albania','Austria','Belarus','Belgium',
     'Bosnia and Herzegovina','Bulgaria','Croatia','Czechia','Denmark','Estonia',
@@ -469,85 +507,142 @@ if dur == 2:
         keynum = 21
         fdaygpt = fday
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times)
-        actlist1 = actlist
-        times1 = times
+        vacsched1 = vacsched(actlist,times)
     with day2:
         actlist = []
         times = []
         keynum = 22
         fdaygpt = fday + timedelta(days=1)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times)
-        actlist2 = actlist
-        times2 = times
+        vacsched2 = vacsched(actlist,times)
     with vp:
-        st.write(repeatlist)
-        st.write(actlist1)
-        st.write(times1)
-        st.write(actlist2)
-        st.write(times2)
+        st.write(f"Schedule For {fday}")
+        st.table(vacsched1)
+        st.write(f"Schedule For {fday + timedelta(days = 1)}")
+        st.table(vacsched2)
 elif dur == 3:
-    day1, day2, day3 = st.tabs(
-        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan']
+    day1, day2, day3, vp = st.tabs(
+        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan', 'Vacation Plan']
     )
     repeatlist = []
     with day1:
+        actlist = []
+        times = []
         keynum = 31
         fdaygpt = fday
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched1 = vacsched(actlist,times)
     with day2:
+        actlist = []
+        times = []
         keynum = 32
         fdaygpt = fday + timedelta(days=1)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched2 = vacsched(actlist,times)
     with day3:
+        actlist = []
+        times = []
         keynum = 33
         fdaygpt = fday + timedelta(days=2)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched3 = vacsched(actlist,times)
+    with vp:
+        st.write(f"Schedule For {fday}")
+        st.table(vacsched1)
+        st.write(f"Schedule For {fday + timedelta(days = 1)}")
+        st.table(vacsched2)
+        st.write(f"Schedule For {fday + timedelta(days = 2)}")
+        st.table(vacsched3)
 elif dur == 4:
-    day1, day2, day3, day4 = st.tabs(
-        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan', 'Day 4 Plan']
+    day1, day2, day3, day4, vp = st.tabs(
+        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan', 'Day 4 Plan', 'Vacation Plan']
     )
     repeatlist = []
     with day1:
+        actlist = []
+        times = []
         keynum = 41
         fdaygpt = fday
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched1 = vacsched(actlist,times)
     with day2:
+        actlist = []
+        times = []
         keynum = 42
         fdaygpt = fday + timedelta(days=1)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched2 = vacsched(actlist,times)
     with day3:
+        actlist = []
+        times = []
         keynum = 43
         fdaygpt = fday + timedelta(days=2)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched3 = vacsched(actlist,times)
     with day4:
+        actlist = []
+        times = []
         keynum = 44
         fdaygpt = fday + timedelta(days=3)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched4 = vacsched(actlist,times)
+    with vp:
+        st.write(f"Schedule For {fday}")
+        st.table(vacsched1)
+        st.write(f"Schedule For {fday + timedelta(days = 1)}")
+        st.table(vacsched2)
+        st.write(f"Schedule For {fday + timedelta(days = 2)}")
+        st.table(vacsched3)
+        st.write(f"Schedule For {fday + timedelta(days = 3)}")
+        st.table(vacsched4)
 elif dur == 5:
-    day1, day2, day3, day4, day5 = st.tabs(
-        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan', 'Day 4 Plan', 'Day 5 Plan']
+    day1, day2, day3, day4, day5, vp = st.tabs(
+        ['Day 1 Plan', 'Day 2 Plan', 'Day 3 Plan', 'Day 4 Plan', 'Day 5 Plan', 'Vacation Plan']
     )
     repeatlist = []
     with day1:
+        actlist = []
+        times = []
         keynum = 51
         fdaygpt = fday
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched1 = vacsched(actlist,times)
     with day2:
+        actlist = []
+        times = []
         keynum = 52
         fdaygpt = fday + timedelta(days=1)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched2 = vacsched(actlist,times)
     with day3:
+        actlist = []
+        times = []
         keynum = 53
         fdaygpt = fday + timedelta(days=2)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched3 = vacsched(actlist,times)
     with day4:
+        actlist = []
+        times = []
         keynum = 54
         fdaygpt = fday + timedelta(days=3)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
+        vacsched4 = vacsched(actlist,times)
     with day5:
+        actlist = []
+        times = []
         keynum = 55
         fdaygpt = fday + timedelta(days=4)
         dayvac(fdaygpt,ctry,citty,keynum,repeatlist)
-
-
-
+        vacsched5 = vacsched(actlist,times)
+    with vp:
+        st.write(f"Schedule For {fday}")
+        st.table(vacsched1)
+        st.write(f"Schedule For {fday + timedelta(days = 1)}")
+        st.table(vacsched2)
+        st.write(f"Schedule For {fday + timedelta(days = 2)}")
+        st.table(vacsched3)
+        st.write(f"Schedule For {fday + timedelta(days = 3)}")
+        st.table(vacsched4)
+        st.write(f"Schedule For {fday + timedelta(days = 4)}")
+        st.table(vacsched5)
