@@ -1,4 +1,4 @@
-import streamlit as st
+mport streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -18,19 +18,19 @@ def vacayitems(ctry, citty, fdaygpt, longchoice,tags,repeatlist,timey):
         longchoice == '1-6 hours'
     if len(tags) == 1:
         model = genai.GenerativeModel('gemini-2.5-flash')
-        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} that will definitely be available on {fdaygpt} involving {tags[0]}. Do not include {repeatlist}. Make sure they are only {longchoice} long and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
+        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} that will definitely be available on {fdaygpt} involving {tags[0]}. Do not include {repeatlist}. Make sure they are between {longchoice} and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
         vacaylist = response.resolve()
     elif len(tags) == 2:
         model = genai.GenerativeModel('gemini-2.5-flash')
-        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} that will definitely be available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Do not include {repeatlist}. Make sure they are only {longchoice} long and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
+        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} that will definitely be available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Do not include {repeatlist}. Make sure they are between {longchoice} and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
         vacaylist = response.resolve()
     elif len(tags) == 3:
         model = genai.GenerativeModel('gemini-2.5-flash')
-        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} that will definitely be available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Do not include {repeatlist}. Make sure they are only {longchoice} long and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
+        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} that will definitely be available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Do not include {repeatlist}. Make sure they are between {longchoice} and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
         vacaylist = response.resolve()
+    vacaylist = response.text
     pos = vacaylist.find('1.')
     vacaylist = vacaylist[pos:]
-    vacaylist = response.text
     return vacaylist
 
 @st.cache_data
@@ -39,15 +39,15 @@ def vacayitemsactone(ctry, citty, fdaygpt,longchoice,tags,timey):
         longchoice == '1-6 hours'
     if len(tags) == 1:
         model = genai.GenerativeModel('gemini-2.5-flash')
-        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Make sure they are only {longchoice} long and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
+        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}. Make sure they are between {longchoice} and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
         vacaylist = response.resolve()
     elif len(tags) == 2:
         model = genai.GenerativeModel('gemini-2.5-flash')
-        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Make sure they are only {longchoice} long and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
+        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]} and/or {tags[1]}. Make sure they are between {longchoice} and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
         vacaylist = response.resolve()
     elif len(tags) == 3:
         model = genai.GenerativeModel('gemini-2.5-flash')
-        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Make sure they are only {longchoice} long and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
+        response = model.generate_content([f"Make a numbered list of the 5 most popular tourist attractions/destinations in {citty}, {ctry} available on {fdaygpt} involving {tags[0]}, {tags[1]}, and/or {tags[2]}. Make sure they are between {longchoice} and start at {timey}. Don't include the start time in the list. Include a one sentence description and its duration in hours. If the duration is a range, put the duration as the higher estimate. Put a colon after the attraction's name."])
         vacaylist = response.resolve()
     vacaylist = response.text
     pos = vacaylist.find('1.')
@@ -67,15 +67,14 @@ def actdur(vchoice,vacay):
     cdur = float(cdur)
     return cdur
 
-
 def actchoice(vchoice,vacay):
     vsl = ''
     vchoice = int(vchoice)
     start = vacay.find(f"{vchoice}. ") + 3
     end = vacay.find(":", start)
     vsl = vacay[start:end]
+    vsl = vsl.replace("*", " ")
     vsl.strip()
-    vsl = vsl[1:]
     return vsl
 
 def dayvac(fdaygpt,ctry,citty,keynum,repeatlist,actlist,times):
