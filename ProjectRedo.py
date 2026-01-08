@@ -331,18 +331,18 @@ def vacsched(actlist,times):
     if len(actlist) == 1:
         vacschedtable = pd.DataFrame(
         {"Activity 1": [actlist[0], times[0], times[1]]},
-        index = ["Activity Name", "Start time", "End Time"])
+        index = ["Activity Name", "Start Time", "End Time"])
     elif len(actlist) == 2:
         vacschedtable = pd.DataFrame(
         {"Activity 1": [actlist[0], times[0], times[1]],
         "Activity 2": [actlist[1], times[2], times[3]]},
-        index = ["Activity Name", "Start time", "End Time"])
+        index = ["Activity Name", "Start Time", "End Time"])
     elif len(actlist) == 3:
         vacschedtable = pd.DataFrame(
         {"Activity 1": [actlist[0], times[0], times[1]],
         "Activity 2": [actlist[1], times[2], times[3]],
         "Activity 3": [actlist[2], times[4], times[5]]},
-        index = ["Activity Name", "Start time", "End Time"])
+        index = ["Activity Name", "Start Time", "End Time"])
     return(vacschedtable)
 
 ctry =  st.selectbox('Select a country:', ['Albania','Austria','Belarus','Belgium',
