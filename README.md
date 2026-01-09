@@ -1,20 +1,15 @@
-Purpose and overview
-  This project allows a user to plan a 2-5 day long vacation in a European city. It includes the 5 most populated cities of over 40 European countries. It includes tag selection so the user only gets suggestions for activities that
-  interest them. The user can select a starting time and duration. They can decide how many activities they want in a day, which ranges from 1to 3. Google Gemini uses the country, city, date, tags, duration, and starting time to
-  generate a numbered list of 5 activities that fit that criteria. The user can select one of the 5 activities to add to their schedule. The final output is a schedule for each day that includes the activity’s name, start time, and
-  end time.
+This project allows a user to plan a 2-5 day long vacation in a European city. It includes the 5 most populated cities of over 40 European countries. It includes tag selection so the user only gets suggestions for activities that interest them. The user can select a starting time and duration. They can decide how many activities they want in a day, which ranges from 1to 3. Google Gemini uses the country, city, date, tags, duration, and starting time to generate a numbered list of 5 activities that fit that criteria. The user can select one of the 5 activities to add to their schedule. The final output is a schedule for each day that includes the activity’s name, start time, and end time.
 
-Setup and installation instructions
-  Import the following:
-    •	import streamlit as st
-    •	import pandas as pd
-    •	import numpy as np
-    •	from streamlit_option_menu import option_menu
-    •	import os
-    •	import google.generativeai as genai
-    •	from datetime import date
-    •	from datetime import time
-    •	from datetime import timedelta
+Import the following:
+  •	import streamlit as st
+  • import pandas as pd
+  •	import numpy as np
+  •	from streamlit_option_menu import option_menu
+  •	import os
+  •	import google.generativeai as genai
+  •	from datetime import date
+  •	from datetime import time
+  •	from datetime import timedelta
 
 How to Plan Your European Vacation (Run the Streamlit App)
   Choosing a Date and Location
