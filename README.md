@@ -3,15 +3,15 @@ This project allows a user to plan a 2-5 day long vacation in a European city. I
 
 ## Before You Start
 Import the following:  
--import streamlit as st
--import pandas as pd
--import numpy as np
--from streamlit_option_menu import option_menu
--import os
--import google.generativeai as genai
--from datetime import date
--from datetime import time
--from datetime import timedelta
+- import streamlit as st
+- import pandas as pd
+- import numpy as np
+- from streamlit_option_menu import option_menu
+- import os
+- import google.generativeai as genai
+- from datetime import date
+- from datetime import time
+- from datetime import timedelta
   
 ## How to Plan Your European Vacation (Run the Streamlit App)
   
