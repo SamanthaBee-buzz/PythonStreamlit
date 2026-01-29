@@ -51,7 +51,7 @@ SamanthaBee-buzz
 ## API and data source details
   
 I used gemini 2.5 flash. I got city names and country populations from https://worldpopulationreview.com/countries/[country name] and checked for special characters like è and ä using https://en.wikipedia.org/wiki/List_of_cities_in_[country name].  
-To be more specific, my sources are:
+To be more specific, my sources are:  
 https://simple.wikipedia.org/wiki/List_of_European_countries  
 https://worldpopulationreview.com/countries/albania  
 https://worldpopulationreview.com/countries/austria  
